@@ -7,8 +7,8 @@ type Interface interface {
 	Identifier() string
 	Help() []HelpStruct
 	DoesMatch(messageIn telegramclient.WebhookMessageStruct) bool
-	GetCommandMatch(messageIn telegramclient.WebhookMessageStruct) []string
-	GetInlineMatches(messageIn telegramclient.WebhookMessageStruct) []string
+	CommandMatch(messageIn telegramclient.WebhookMessageStruct) []string
+	InlineMatches(messageIn telegramclient.WebhookMessageStruct) []string
 	Process(messageIn telegramclient.WebhookMessageStruct) ([]telegramclient.MessageStruct, error)
 	HandleError(messageIn telegramclient.WebhookMessageStruct, identifier string, err error)
 }
