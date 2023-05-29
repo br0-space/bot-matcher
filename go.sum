@@ -40,6 +40,8 @@ github.com/BurntSushi/toml v0.3.1/go.mod h1:xHWCNGjB5oqiDr8zfno3MHue2Ht5sIBksp03
 github.com/BurntSushi/xgb v0.0.0-20160522181843-27f122750802/go.mod h1:IVnqGOEym/WlBOVXweHU+Q+/VP0lqqI8lqeDx9IjBqo=
 github.com/br0-space/bot-logger v0.0.0-20230528034653-b8182586cff5 h1:wQB20LLAwFQFsroLIPbgyM+46MqC39oRRhgghrHJXu8=
 github.com/br0-space/bot-logger v0.0.0-20230528034653-b8182586cff5/go.mod h1:b0Bh0Qe0Ss15kKLh76GQKkPq7qyH/Uo7+MM2rQAvcgI=
+github.com/br0-space/bot-logger v0.1.0 h1:1eBjueIp+LUeXCFZoPslE657yDr1NF6Dej/XqaibfD8=
+github.com/br0-space/bot-logger v0.1.0/go.mod h1:b0Bh0Qe0Ss15kKLh76GQKkPq7qyH/Uo7+MM2rQAvcgI=
 github.com/br0-space/bot-telegramclient v0.1.0 h1:U5EFMnHNfOzw9ALLW1vwPV0WKHCeki3ADK+XOsdy2rA=
 github.com/br0-space/bot-telegramclient v0.1.0/go.mod h1:xZ9JyeNTFLloA8TqddRbo9lrdOuOqZu8W2euS8LXlWw=
 github.com/census-instrumentation/opencensus-proto v0.2.1/go.mod h1:f6KPmirojxKA12rnyqOA5BBL4O983OfeGPqjHWSTneU=
