@@ -46,6 +46,8 @@ github.com/br0-space/bot-logger v0.1.1 h1:TzuQSLpSCwqfJf2alKNXJdhI3JNKTSdUyinVAV
 github.com/br0-space/bot-logger v0.1.1/go.mod h1:b0Bh0Qe0Ss15kKLh76GQKkPq7qyH/Uo7+MM2rQAvcgI=
 github.com/br0-space/bot-telegramclient v0.1.0 h1:U5EFMnHNfOzw9ALLW1vwPV0WKHCeki3ADK+XOsdy2rA=
 github.com/br0-space/bot-telegramclient v0.1.0/go.mod h1:xZ9JyeNTFLloA8TqddRbo9lrdOuOqZu8W2euS8LXlWw=
+github.com/br0-space/bot-telegramclient v0.1.1 h1:Ux5meyJMbfP1+IaUdUEg1I28gEm4nPPWgvckuoFxjAI=
+github.com/br0-space/bot-telegramclient v0.1.1/go.mod h1:6ZGQRzeKtqowtraBZ2lptMM2fg3E5ssy2ttG0d6Fxfc=
 github.com/census-instrumentation/opencensus-proto v0.2.1/go.mod h1:f6KPmirojxKA12rnyqOA5BBL4O983OfeGPqjHWSTneU=
 github.com/chzyer/logex v1.1.10/go.mod h1:+Ywpsq7O8HXn0nuIou7OrIPyXbp3wmkHB+jjWRnGsAI=
 github.com/chzyer/readline v0.0.0-20180603132655-2972be24d48e/go.mod h1:nSuG5e5PlCu98SY8svDHJxuZscDgtXS6KTTbou5AhLI=
