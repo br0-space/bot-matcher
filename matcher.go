@@ -2,11 +2,12 @@ package matcher
 
 import (
 	"fmt"
+	"regexp"
+	"strings"
+
 	logger "github.com/br0-space/bot-logger"
 	telegramclient "github.com/br0-space/bot-telegramclient"
 	"github.com/spf13/viper"
-	"regexp"
-	"strings"
 )
 
 type Matcher struct {

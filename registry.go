@@ -2,9 +2,10 @@ package matcher
 
 import (
 	"fmt"
+	"sync"
+
 	logger "github.com/br0-space/bot-logger"
 	telegramclient "github.com/br0-space/bot-telegramclient"
-	"sync"
 )
 
 const errorTemplate = "⚠️ *Error in matcher \"%s\"*\n\n%s"
@@ -82,5 +83,4 @@ func (r *Registry) Process(messageIn telegramclient.WebhookMessageStruct) {
 	}
 
 	waitGroup.Wait()
-
 }
