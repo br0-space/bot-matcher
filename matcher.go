@@ -58,14 +58,15 @@ func (m Matcher) Help() []HelpStruct {
 }
 
 func (m Matcher) DoesMatch(messageIn telegramclient.WebhookMessageStruct) bool {
-	return m.regexp.MatchString(messageIn.Text)
+	return m.regexp.MatchString(messageIn.TextOrCaption())
 }
 
 func (m Matcher) CommandMatch(messageIn telegramclient.WebhookMessageStruct) []string {
-	match := m.regexp.FindStringSubmatch(messageIn.Text)
+	match := m.regexp.FindStringSubmatch(messageIn.TextOrCaption())
 	if match == nil {
 		return nil
 	}
+
 	if len(match) > 0 {
 		return match[1:]
 	}
@@ -74,7 +75,7 @@ func (m Matcher) CommandMatch(messageIn telegramclient.WebhookMessageStruct) []s
 }
 
 func (m Matcher) InlineMatches(messageIn telegramclient.WebhookMessageStruct) []string {
-	matches := m.regexp.FindAllString(messageIn.Text, -1)
+	matches := m.regexp.FindAllString(messageIn.TextOrCaption(), -1)
 	if matches == nil {
 		return []string{}
 	}
