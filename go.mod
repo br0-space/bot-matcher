@@ -3,7 +3,7 @@ module github.com/br0-space/bot-matcher
 go 1.19
 
 require (
-	github.com/br0-space/bot-logger v0.1.1
+	github.com/br0-space/bot-logger v0.1.2
 	github.com/br0-space/bot-telegramclient v0.1.1
 	github.com/spf13/viper v1.18.2
 )
