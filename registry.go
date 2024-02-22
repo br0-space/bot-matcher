@@ -23,6 +23,7 @@ func NewRegistry(
 	return &Registry{
 		log:      logger,
 		telegram: telegram,
+		matchers: []Interface{},
 	}
 }
 
@@ -58,6 +59,7 @@ func (r *Registry) Process(messageIn telegramclient.WebhookMessageStruct) {
 			if messagesOut == nil {
 				messagesOut = []telegramclient.MessageStruct{}
 			}
+
 			if err != nil {
 				r.log.Errorf("Error in matcher %s: %s", m.Identifier(), err)
 
