@@ -32,6 +32,7 @@ func MakeMatcher(
 		identifier: identifier,
 		regexp:     pattern,
 		help:       help,
+		cfg:        nil,
 	}
 }
 
@@ -95,6 +96,7 @@ func LoadMatcherConfig(identifier string, cfg interface{}) {
 	v := viper.New()
 
 	v.SetConfigFile(fmt.Sprintf("config/%s.yaml", identifier))
+
 	if err := v.ReadInConfig(); err != nil {
 		panic(err)
 	}
