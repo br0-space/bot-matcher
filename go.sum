@@ -46,6 +46,8 @@ github.com/br0-space/bot-logger v0.1.1 h1:TzuQSLpSCwqfJf2alKNXJdhI3JNKTSdUyinVAV
 github.com/br0-space/bot-logger v0.1.1/go.mod h1:b0Bh0Qe0Ss15kKLh76GQKkPq7qyH/Uo7+MM2rQAvcgI=
 github.com/br0-space/bot-logger v0.1.2 h1:k38Do9A9oQFcP05W0CWbJyyZJDhvO9+fkSGi3HNLV1M=
 github.com/br0-space/bot-logger v0.1.2/go.mod h1:b0Bh0Qe0Ss15kKLh76GQKkPq7qyH/Uo7+MM2rQAvcgI=
+github.com/br0-space/bot-logger v0.1.3 h1:pkf7bQwsI3hbIuJZfxRVG/l9/n/7gWRCvu0wxvKMnCA=
+github.com/br0-space/bot-logger v0.1.3/go.mod h1:FOUFZRX9zghjeo73+TDAcb/nS4b8l6SWlSpdh7ZRPBM=
 github.com/br0-space/bot-telegramclient v0.1.0 h1:U5EFMnHNfOzw9ALLW1vwPV0WKHCeki3ADK+XOsdy2rA=
 github.com/br0-space/bot-telegramclient v0.1.0/go.mod h1:xZ9JyeNTFLloA8TqddRbo9lrdOuOqZu8W2euS8LXlWw=
 github.com/br0-space/bot-telegramclient v0.1.1 h1:Ux5meyJMbfP1+IaUdUEg1I28gEm4nPPWgvckuoFxjAI=
