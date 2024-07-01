@@ -4,7 +4,7 @@ go 1.22
 
 require (
 	github.com/br0-space/bot-logger v0.1.3
-	github.com/br0-space/bot-telegramclient v0.1.2
+	github.com/br0-space/bot-telegramclient v0.1.3
 	github.com/spf13/viper v1.19.0
 )
 
