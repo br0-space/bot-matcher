@@ -1,5 +1,7 @@
 github.com/br0-space/bot-logger v0.1.3 h1:pkf7bQwsI3hbIuJZfxRVG/l9/n/7gWRCvu0wxvKMnCA=
 github.com/br0-space/bot-logger v0.1.3/go.mod h1:FOUFZRX9zghjeo73+TDAcb/nS4b8l6SWlSpdh7ZRPBM=
+github.com/br0-space/bot-logger v0.1.4 h1:/znRGEABnnsL5HspWVU6ZsPxRBwLlfDWi1KoBWzw8FU=
+github.com/br0-space/bot-logger v0.1.4/go.mod h1:xKScdBXubTSHdqPkdr5ecDkVfJw9S9CBjCLI04yKyTE=
 github.com/br0-space/bot-telegramclient v0.1.3 h1:odKmw3YVXUuDnlsmBu//hXGWPnlVN86VWGNk4YYwyK0=
 github.com/br0-space/bot-telegramclient v0.1.3/go.mod h1:UH1a0eixhnPwOTbUlz/X99f/hvuHR3C0K+1Ifl8rCzE=
 github.com/davecgh/go-spew v1.1.1 h1:vj9j/u1bqnvCEfJOwUhtlOARqs3+rkHYY13jYWTU97c=
