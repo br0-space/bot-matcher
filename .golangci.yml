@@ -1,19 +1,46 @@
+version: "2"
 run:
   concurrency: 4
-linters-settings:
-  misspell:
-    locale: US
-  gocritic:
-    disabled-checks:
-      - commentFormatting
 linters:
-  enable-all: true
+  default: all
+  enable:
+    - wsl_v5
   disable:
-    - gomnd # deprecated
-    - execinquery # deprecated
-    - lll # long lines
     - depguard
     - gochecknoglobals
     - interfacebloat
     - ireturn
+    - lll
+    - mnd
     - varnamelen
+    - noinlineerr
+    - wsl # replaced by wsl_v5
+  settings:
+    gocritic:
+      disabled-checks:
+        - commentFormatting
+    misspell:
+      locale: US
+  exclusions:
+    generated: lax
+    presets:
+      - comments
+      - common-false-positives
+      - legacy
+      - std-error-handling
+    paths:
+      - third_party$
+      - builtin$
+      - examples$
+formatters:
+  enable:
+    - gci
+    - gofmt
+    - gofumpt
+    - goimports
+  exclusions:
+    generated: lax
+    paths:
+      - third_party$
+      - builtin$
+      - examples$
