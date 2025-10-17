@@ -21,7 +21,7 @@ A matcher declares what incoming messages it responds to (via regex) and returns
 
 ## Installation
 
-Requires Go 1.21+ (tested in CI on latest Go versions).
+Requires Go 1.25+ (as per go.mod; tested in CI on latest Go versions).
 
 ```
 go get github.com/br0-space/bot-matcher
@@ -53,21 +53,21 @@ type HelloMatcher struct {
 }
 
 func New() HelloMatcher {
-    return matcher.MakeMatcher(
+    return HelloMatcher{Matcher: matcher.MakeMatcher(
         "hello",
-        regexp.MustCompile(`(?i)^/hello\b`),
+        regexp.MustCompile(`(?i)^/hello\\b`),
         []matcher.HelpStruct{{
-            Command:     "/hello",
+            Command:     "hello",
             Description: "Say hello",
             Usage:       "/hello",
             Example:     "/hello",
         }},
-    )
+    )}
 }
 
 // Process is called when DoesMatch returns true.
 func (h HelloMatcher) Process(messageIn telegramclient.WebhookMessageStruct) ([]telegramclient.MessageStruct, error) {
-    reply := telegramclient.PlainReply("Hello!", messageIn.ID)
+    reply := telegramclient.Reply("Hello!", messageIn.ID)
     return []telegramclient.MessageStruct{reply}, nil
 }
 ```
@@ -106,26 +106,52 @@ func main() {
 
 ### Optional configuration per matcher
 
-matcher.LoadMatcherConfig lets you unmarshal YAML into your own config struct. A small helper Config type is provided with an optional Enabled flag.
+matcher.LoadMatcherConfig returns a map[int64]T of configurations, keyed by chatID. It reads the fallback config from config/{identifier}.yml (stored under key 0) and any per-chat configs from config/{chatID}/{identifier}.yml. It panics if any required file cannot be read or unmarshalled.
 
 ```go
 // Inside your matcher package
 
+package hello
+
+import (
+	"regexp"
+
+	matcher "github.com/br0-space/bot-matcher"
+)
+
 type MyConfig struct {
-    Enabled *bool `yaml:"enabled"`
-    // your fields...
+	Description string `mapstructure:"description"`
 }
 
-func (h HelloMatcher) WithConfig(cfg *matcher.Config) HelloMatcher {
-    return h.Matcher.WithConfig(cfg).(HelloMatcher)
+func NewFromConfig() HelloMatcher {
+	cfgs := matcher.LoadMatcherConfig[MyConfig]("hello")
+	cfg := cfgs[0]
+
+	help := []matcher.HelpStruct{{
+		Command:     "hello",
+		Description: firstNonEmpty(cfg.Description, "Say hello"),
+		Usage:       "/hello",
+		Example:     "/hello",
+	}}
+
+	return HelloMatcher{Matcher: matcher.MakeMatcher(
+		"hello",
+		regexp.MustCompile(`(?i)^/hello\\b`),
+		help,
+	)}
 }
 
-// At startup
-var cfg MyConfig
-matcher.LoadMatcherConfig("hello", &cfg)
+func firstNonEmpty(values ...string) string {
+	for _, v := range values {
+		if v != "" {
+			return v
+		}
+	}
+	return ""
+}
 ```
 
-This reads config/hello.yaml using Viper and unmarshals it into your struct.
+For more advanced needs (like the examples/configurable matcher), you can use Viper directly to build your config and then construct a matcher accordingly.
 
 ## Concepts and API
 
