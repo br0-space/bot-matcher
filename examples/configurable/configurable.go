@@ -18,9 +18,18 @@ type Matcher struct {
 // MakeMatcher constructs a new configurable matcher using values from config/configurable.yaml.
 // It loads the command, reply, and description from the config, builds the matching pattern accordingly,
 // and wires the base matcher with that pattern and a generated help entry.
+// If the config cannot be loaded, it uses a default configuration with empty values (which trigger defaults in Config methods).
 func MakeMatcher() Matcher {
-	cfgs := matcher.LoadMatcherConfig[Config](identifier)
-	cfg := cfgs[0]
+	cfgs, err := matcher.LoadMatcherConfig[Config](identifier)
+
+	var cfg Config
+	if err != nil {
+		// If config loading fails, use a default config
+		// The Config methods will provide sensible defaults
+		cfg = Config{}
+	} else {
+		cfg = cfgs[0]
+	}
 
 	pattern := cfg.Pattern()
 	help := cfg.Help()

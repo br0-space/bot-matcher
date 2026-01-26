@@ -128,3 +128,56 @@ func TestMatcher_CustomCommandAndReply(t *testing.T) { //nolint:paralleltest
 		Example:     "/hello",
 	}, help[0])
 }
+
+// TestMatcher_MissingConfig verifies that the matcher gracefully handles missing config files.
+// When the config cannot be loaded, the matcher should use default values.
+func TestMatcher_MissingConfig(t *testing.T) { //nolint:paralleltest
+	// Create a temp dir without any config files
+	dir := t.TempDir()
+
+	t.Chdir(dir)
+
+	// MakeMatcher should not panic when config is missing
+	m := configurable.MakeMatcher()
+
+	// Should use defaults
+	assert.True(t, m.DoesMatch(newTestMessage("/configurable")))
+	assert.False(t, m.DoesMatch(newTestMessage("/hello")))
+
+	replies, err := m.Process(newTestMessage("/configurable"))
+	require.NoError(t, err)
+	assert.Len(t, replies, 1)
+	assert.Equal(t, "unconfigured reply", replies[0].Text)
+
+	help := m.Help()
+	require.Len(t, help, 1)
+	assert.Equal(t, "configurable", help[0].Command)
+	assert.Equal(t, "Responds with a configured reply", help[0].Description)
+}
+
+// TestMatcher_InvalidConfig verifies that the matcher handles invalid YAML gracefully.
+func TestMatcher_InvalidConfig(t *testing.T) { //nolint:paralleltest
+	// Create a temp dir and change to it
+	dir := t.TempDir()
+
+	t.Chdir(dir)
+
+	// Create config directory and write invalid YAML directly
+	configDir := filepath.Join(dir, "config")
+	require.NoError(t, os.MkdirAll(configDir, 0o755))
+
+	invalidYAML := "command: hello\nreply:\n  nested:\n    invalid: indentation\n  breaks: yaml"
+	configFile := filepath.Join(configDir, "configurable.yml")
+	require.NoError(t, os.WriteFile(configFile, []byte(invalidYAML), 0o600))
+
+	// MakeMatcher should not panic with invalid config, should fall back to defaults
+	m := configurable.MakeMatcher()
+
+	// Should use defaults since config couldn't be loaded
+	assert.True(t, m.DoesMatch(newTestMessage("/configurable")))
+
+	replies, err := m.Process(newTestMessage("/configurable"))
+	require.NoError(t, err)
+	assert.Len(t, replies, 1)
+	assert.Equal(t, "unconfigured reply", replies[0].Text)
+}

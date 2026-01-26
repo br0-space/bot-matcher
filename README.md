@@ -106,7 +106,7 @@ func main() {
 
 ### Optional configuration per matcher
 
-matcher.LoadMatcherConfig returns a map[int64]T of configurations, keyed by chatID. It reads the fallback config from config/{identifier}.yml (stored under key 0) and any per-chat configs from config/{chatID}/{identifier}.yml. It panics if any required file cannot be read or unmarshalled.
+matcher.LoadMatcherConfig returns a map[int64]T of configurations, keyed by chatID, or an error if loading fails. It reads the fallback config from config/{identifier}.yml (stored under key 0) and any per-chat configs from config/{chatID}/{identifier}.yml. Returns an error if any required file cannot be read or unmarshalled.
 
 ```go
 // Inside your matcher package
@@ -114,6 +114,7 @@ matcher.LoadMatcherConfig returns a map[int64]T of configurations, keyed by chat
 package hello
 
 import (
+	"log"
 	"regexp"
 
 	matcher "github.com/br0-space/bot-matcher"
@@ -124,7 +125,11 @@ type MyConfig struct {
 }
 
 func NewFromConfig() HelloMatcher {
-	cfgs := matcher.LoadMatcherConfig[MyConfig]("hello")
+	cfgs, err := matcher.LoadMatcherConfig[MyConfig]("hello")
+	if err != nil {
+		// Handle error - either fail startup or use defaults
+		log.Fatalf("failed to load config: %v", err)
+	}
 	cfg := cfgs[0]
 
 	help := []matcher.HelpStruct{{
@@ -148,6 +153,23 @@ func firstNonEmpty(values ...string) string {
 		}
 	}
 	return ""
+}
+```
+
+Alternatively, you can handle the error gracefully and use default values:
+
+```go
+func NewFromConfigWithDefaults() HelloMatcher {
+	cfgs, err := matcher.LoadMatcherConfig[MyConfig]("hello")
+	var cfg MyConfig
+	if err != nil {
+		// Use default config if loading fails
+		cfg = MyConfig{Description: "Say hello"}
+	} else {
+		cfg = cfgs[0]
+	}
+
+	// ... rest of the implementation
 }
 ```
 
