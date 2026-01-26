@@ -1,9 +1,20 @@
-# Default ignored files
-/shelf/
-/workspace.xml
-# Editor-based HTTP Client requests
-/httpRequests/
-# Datasource local storage ignored files
-/dataSources/
-/dataSources.local.xml
-GitlabLint.xml
+# Ignore everything in .idea by default
+*
+
+# Keep this file
+!.gitignore
+
+# --- Core IntelliJ project/module definition (share) ---
+!modules.xml
+!*.iml
+!vcs.xml
+
+# --- Team-wide style & quality settings (share) ---
+!codeStyles/
+!codeStyles/**
+!inspectionProfiles/
+!inspectionProfiles/**
+
+# --- Go plugin settings (share if you want consistent IDE behavior) ---
+!go.imports.xml
+!golinter.xml
